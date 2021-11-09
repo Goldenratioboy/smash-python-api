@@ -61,12 +61,12 @@ class UltimateFrameData():
                 special_move_array.append({
                     "name": elem.find('div', class_='movename').get_text().strip(),
                     "activeFrames": elem.find('div', class_='activeframes').get_text().strip(),
-                    "on_shield": elem.find('div', class_='advantage').get_text().strip(),
-                    "total_frames": elem.find('div', class_='totalframes').get_text().strip(),
-                    "landing_lag": elem.find('div', class_='landinglag').get_text().strip(),
+                    "onShield": elem.find('div', class_='advantage').get_text().strip(),
+                    "totalFrames": elem.find('div', class_='totalframes').get_text().strip(),
+                    "landingLag": elem.find('div', class_='landinglag').get_text().strip(),
                     "notes": elem.find('div', class_='notes').get_text().strip(),
-                    "sheild_lag": elem.find('div', class_='shieldlag').get_text().strip(),
-                    "shield_stun": elem.find('div', class_='shieldstun').get_text().strip(),
+                    "shieldLag": elem.find('div', class_='shieldlag').get_text().strip(),
+                    "shieldStun": elem.find('div', class_='shieldstun').get_text().strip(),
                     "image": my_image
                 })
         character_data['specialMoves'] = special_move_array
