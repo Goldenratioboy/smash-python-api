@@ -11,7 +11,6 @@ class UltimateFrameData():
         response = requests.get(self.request)
         soup = BeautifulSoup(response.content, 'html.parser')
         character_data = {}
-
         ground_attacks = soup.find(id='groundattacks').find_next('div')
         for elem in ground_attacks:
             if type(elem) == Tag:
@@ -45,12 +44,17 @@ class UltimateFrameData():
                 }
 
         special_attacks = soup.find(id='specialattacks').find_next('div')
-        for elem in special_attacks:
+        special_move_array = []
+        for elem in special_attacks:       
             if type(elem) == Tag:
                 my_image = None
                 if elem.find('a') is not None:
-                    my_image = elem.find('a')['data-featherlight']
-                character_data[elem.find('div', class_='movename').get_text().strip()] = {
+                    try:
+                        my_image = elem.find('a')['data-featherlight']
+                    except:
+                        print(elem.find('a'))
+                special_move_array.append({
+                    "name": elem.find('div', class_='movename').get_text().strip(),
                     "activeFrames": elem.find('div', class_='activeframes').get_text().strip(),
                     "on_shield": elem.find('div', class_='advantage').get_text().strip(),
                     "total_frames": elem.find('div', class_='totalframes').get_text().strip(),
@@ -59,7 +63,8 @@ class UltimateFrameData():
                     "sheild_lag": elem.find('div', class_='shieldlag').get_text().strip(),
                     "shield_stun": elem.find('div', class_='shieldstun').get_text().strip(),
                     "image": my_image
-                }
+                })
+        character_data['specialMoves'] = special_move_array
 
         grabs_throws = soup.find(id='grabs').find_next('div')
         for elem in grabs_throws:
