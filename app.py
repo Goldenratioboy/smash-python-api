@@ -5,7 +5,8 @@ app = Flask(__name__)
 
 @app.route('/<character>')
 def get_character(character):
-    return UFD.UltimateFrameData(character).get_character_data()
+    result = {"characterMoves": UFD.UltimateFrameData(character).get_character_data()}
+    return result
 
 @app.route('/favicon.ico')
 def get_favicon():
