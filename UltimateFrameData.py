@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from bs4.element import Tag
 
 class UltimateFrameData():
-
+    #test
     def __init__(self, character):
         self.request = 'https://ultimateframedata.com/' + character + '.php'
 
