@@ -19,15 +19,23 @@ class UltimateFrameData():
                 my_image = None
                 if elem.find('a') is not None:
                     my_image = elem.find('a')['data-featherlight']
-                ground_move_array.append({
-                    "name": elem.find('div', class_='movename').get_text().strip(),
-                    "activeFrames": elem.find('div', class_='activeframes').get_text().strip(),
-                    "onShield": elem.find('div', class_='advantage').get_text().strip(),
-                    "totalFrames": elem.find('div', class_='totalframes').get_text().strip(),
-                    "shieldLag": elem.find('div', class_='shieldlag').get_text().strip(),
-                    "shieldStun": elem.find('div', class_='shieldstun').get_text().strip(),
-                    "image": my_image
-                })
+                if elem.find('div', class_='activeframes') is None:
+                    # Luigi down taunt is dumb
+                    ground_move_array.append({
+                        "name": elem.find('div', class_='movename').get_text().strip(),
+                        "totalFrames": elem.find('div', class_='totalframes').get_text().strip(),
+                        "image": my_image
+                    })
+                else:
+                    ground_move_array.append({
+                        "name": elem.find('div', class_='movename').get_text().strip(),
+                        "activeFrames": elem.find('div', class_='activeframes').get_text().strip(),
+                        "onShield": elem.find('div', class_='advantage').get_text().strip(),
+                        "totalFrames": elem.find('div', class_='totalframes').get_text().strip(),
+                        "shieldLag": elem.find('div', class_='shieldlag').get_text().strip(),
+                        "shieldStun": elem.find('div', class_='shieldstun').get_text().strip(),
+                        "image": my_image
+                    })
         character_data['groundMoves'] = ground_move_array
 
         aerial_attacks = soup.find(id='aerialattacks').find_next('div')
@@ -60,17 +68,30 @@ class UltimateFrameData():
                         my_image = elem.find('a')['data-featherlight']
                     except:
                         print(elem.find('a'))
-                special_move_array.append({
-                    "name": elem.find('div', class_='movename').get_text().strip(),
-                    "activeFrames": elem.find('div', class_='activeframes').get_text().strip(),
-                    "onShield": elem.find('div', class_='advantage').get_text().strip(),
-                    "totalFrames": elem.find('div', class_='totalframes').get_text().strip(),
-                    "landingLag": elem.find('div', class_='landinglag').get_text().strip(),
-                    "notes": elem.find('div', class_='notes').get_text().strip(),
-                    "shieldLag": elem.find('div', class_='shieldlag').get_text().strip(),
-                    "shieldStun": elem.find('div', class_='shieldstun').get_text().strip(),
-                    "image": my_image
-                })
+                if elem.find('div', class_='activeframes') is None:
+                    # rosalina is dumb and isabelle is dumb
+                    special_move_array.append({
+                        "name": elem.find('div', class_='movename').get_text().strip(),
+                        "onShield": elem.find('div', class_='advantage').get_text().strip(),
+                        "totalFrames": elem.find('div', class_='totalframes').get_text().strip(),
+                        "landingLag": elem.find('div', class_='landinglag').get_text().strip(),
+                        "notes": elem.find('div', class_='notes').get_text().strip(),
+                        "shieldLag": elem.find('div', class_='shieldlag').get_text().strip(),
+                        "shieldStun": elem.find('div', class_='shieldstun').get_text().strip(),
+                        "image": my_image
+                    })
+                else:
+                    special_move_array.append({
+                        "name": elem.find('div', class_='movename').get_text().strip(),
+                        "activeFrames": elem.find('div', class_='activeframes').get_text().strip(),
+                        "onShield": elem.find('div', class_='advantage').get_text().strip(),
+                        "totalFrames": elem.find('div', class_='totalframes').get_text().strip(),
+                        "landingLag": elem.find('div', class_='landinglag').get_text().strip(),
+                        "notes": elem.find('div', class_='notes').get_text().strip(),
+                        "shieldLag": elem.find('div', class_='shieldlag').get_text().strip(),
+                        "shieldStun": elem.find('div', class_='shieldstun').get_text().strip(),
+                        "image": my_image
+                    })
         character_data['specialMoves'] = special_move_array
 
         grabs_throws = soup.find(id='grabs').find_next('div')
